@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\AuthorsController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::controller(AuthorsController::class)->group(function () {
+    Route::get('authors', 'index');
+    Route::get('authors/{id}', 'show');
+    Route::post('authors', 'store');
+    Route::put('authors/{id}', 'update');
+    Route::delete('authors/{id}', 'destroy');
+    Route::get('authors/search/{query}', 'search');
 });
